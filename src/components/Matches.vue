@@ -35,23 +35,23 @@
           />
         </div>
       </nav>
-      <div class="card">
-        <Filter
+      <div v-bind:class="{'card':true, 'hidden': (hidden)}">
+        <Filter class="mb-1"
             @search-in-table="searchInput"
             :options="seasons"
             :criteria="'Filter by season'"
           />
-          <Filter
+          <Filter   class="mb-1"
             @search-in-table="searchInput"
             :options="teams"
             :criteria="'Filter by team'"
           />
-          <Filter
+          <Filter  class="mb-1"
             @search-in-table="searchInput"
             :options="venues"
             :criteria="'Filter by venue'"
           />
-          <Search
+          <Search  class="mb-1"
             :placeholder="'search for teams and venues'"
             @input="searchInput"
           />
@@ -103,7 +103,7 @@ export default {
       teams,
       seasons,
       venues,
-      filter:"hidden"
+      hidden:true
     };
   },
   methods: {
@@ -114,7 +114,7 @@ export default {
       );
     },
     filterClicked(){
-      console.log("clicked")
+      this.hidden = this.hidden? false :true
     }
   },
 };
