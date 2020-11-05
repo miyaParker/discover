@@ -1,9 +1,9 @@
 
 <template>
   <NavBar @entity="setEntity" />
-  <Matches v-if="entity == 'Matches'" />
-  <Teams v-if="entity == 'Teams'" />
-  <Players v-if="entity == 'Players'" />
+  <Matches v-show="entity == 'Matches'" />
+  <Teams v-show="entity == 'Teams'" />
+  <Players v-show="entity == 'Players'" />
 </template>
 <script>
 import { defineAsyncComponent } from "vue";

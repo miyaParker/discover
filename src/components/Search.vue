@@ -1,6 +1,6 @@
 <template>
-  <form v-on:submit.prevent="fetchInput">
-    <input type="text" :placeholder="placeholder" v-model="searchInput"/>
+  <form>
+    <input type="text" :placeholder="placeholder"/>
     <button>search</button>
   </form>
 </template>
