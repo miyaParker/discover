@@ -1,13 +1,19 @@
 <template>
-  <div class="grid-display">
-    <div v-for="team in teams" :key="team.team">
-      <div class="card">
-        <span class="heading">{{ team.team }}</span>
-        <div class="flex">
-          <img src="./media/yellow.png" alt="" />
-          <div>
-            <span class="block wins">{{ team.home_matches }}/{{ team.home_wins }}</span>
-            <span class="block wins">{{ team.away_matches }}/{{ team.away_wins }}</span>
+  <div class="container">
+    <div class="grid-display">
+      <div v-for="team in teams" :key="team.team">
+        <div class="card">
+          <span class="heading">{{ team.team }}</span>
+          <div class="flex">
+            <img src="./media/yellow.png" alt="" />
+            <div>
+              <span class="block wins"
+                >{{ team.home_matches }}/{{ team.home_wins }}</span
+              >
+              <span class="block wins"
+                >{{ team.away_matches }}/{{ team.away_wins }}</span
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -38,10 +44,10 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-.block{
+.block {
   display: block;
 }
-.wins{
+.wins {
   font-size: 1rem;
 }
 .card {
@@ -55,10 +61,9 @@ export default {
   background-color: #420264;
 }
 .grid-display {
-  padding: 1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 1rem;
-  justify-content: space-between;
+  margin: 1rem 0;
 }
 </style>

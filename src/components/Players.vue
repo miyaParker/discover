@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="flex">
       <Filter
         @search-in-table="searchInput"
@@ -10,19 +10,21 @@
     </div>
 
     <div class="grid-display">
-      <div v-for="player in players" :key="player.name">
+      <div v-for="player in playersArray" :key="player.name">
         <div class="card">
           <div class="flex">
-            
             <img src="./media/player.png" alt="" />
             <div>
-              <span class="block detail">{{ player.Player_Name}}</span>
-              <span class="block">{{ player.DOB}}</span>
-              <span >{{player.Country}}</span>
+              <span class="block detail">{{ player.Player_Name }}</span>
+              <span class="block">{{ player.DOB }}</span>
+              <span>{{ player.Country }}</span>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div>
+      <button v-on:click="loadMore" class="button">Load More</button>
     </div>
   </div>
 </template>
@@ -37,6 +39,9 @@ export default {
     return {
       players,
       seasons,
+      playersArray: [],
+      limit: 12,
+      busy: false,
     };
   },
   components: {
@@ -51,15 +56,35 @@ export default {
         Object.values(player).includes(value)
       );
     },
+    loadMore() {
+      this.busy = true;
+      const append = players.slice(
+        this.playersArray.length,
+        this.limit + this.playersArray.length
+      );
+      this.playersArray = this.playersArray.concat(append);
+      this.busy = false;
+    },
+    filterClicked() {
+      this.hidden = this.hidden ? false : true;
+    },
+  },
+  created() {
+    this.loadMore();
   },
 };
 </script>
 <style scoped>
-.detail{
+.button {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+.detail {
   font-size: 1rem;
 }
 .heading {
-  color: #FDCD00;
+  color: #fdcd00;
   padding: 0 1rem;
   border-bottom: 1px solid grey;
   margin-bottom: 0.5rem;
@@ -79,7 +104,7 @@ export default {
 }
 .grid-display {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 1rem;
   margin: 1rem 0;
 }

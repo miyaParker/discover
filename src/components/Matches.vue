@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="grid">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <button
@@ -90,7 +90,7 @@
       </div>
     </div>
     <div>
-      <button v-on:click="loadMore">Load More</button>
+      <button v-on:click="loadMore" class="button">Load More</button>
     </div>
   </div>
 </template>
@@ -116,7 +116,6 @@ export default {
       hidden: true,
     };
   },
-  mounted() {},
   methods: {
     searchInput(value) {
       this.matchesArray = this.matchesArray.filter((match) =>
@@ -143,18 +142,19 @@ export default {
 };
 </script>
 <style scoped>
-th {
-  font-size: 0.8rem;
-  text-transform: uppercase;
+.container{
+  padding-bottom: 1rem;
 }
-tr {
-  font-size: 0.8rem;
+.button{
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
 }
 .card {
   color: #ffffff;
   padding: 1rem 0;
   font-size: 0.9rem;
-  box-shadow: 3px 3px 5px 0px #221121;
+  box-shadow: 3px 3px 5px 0px #7970783a;
   border: none;
   border-radius: 0.5rem;
   background-color: #420264;

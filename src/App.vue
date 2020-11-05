@@ -34,7 +34,7 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Carme&display=swap');
 #app {
-  background-color:#340744;
+  background-color:#fff;
   font-family: Carme;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
