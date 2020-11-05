@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="grid">
       <nav class="navbar navbar-expand-lg navbar-dark">
-        <button
+        <button v-on:click="filterClicked"
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -11,7 +11,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <img src="./media/filter.png" alt="" />
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Filter
@@ -35,6 +35,27 @@
           />
         </div>
       </nav>
+      <div class="card">
+        <Filter
+            @search-in-table="searchInput"
+            :options="seasons"
+            :criteria="'Filter by season'"
+          />
+          <Filter
+            @search-in-table="searchInput"
+            :options="teams"
+            :criteria="'Filter by team'"
+          />
+          <Filter
+            @search-in-table="searchInput"
+            :options="venues"
+            :criteria="'Filter by venue'"
+          />
+          <Search
+            :placeholder="'search for teams and venues'"
+            @input="searchInput"
+          />
+      </div>
     </div>
     <div class="grid">
       <div v-for="match in matches" :key="match.id" class="card">
@@ -82,6 +103,7 @@ export default {
       teams,
       seasons,
       venues,
+      filter:"hidden"
     };
   },
   methods: {
@@ -91,6 +113,9 @@ export default {
         Object.values(match).includes(value)
       );
     },
+    filterClicked(){
+      console.log("clicked")
+    }
   },
 };
 </script>
@@ -111,6 +136,9 @@ tr {
   border-radius: 0.5rem;
   background-color: #420264;
   cursor: pointer;
+}
+.hidden{
+  display: none;
 }
 .heading {
   color: #fdcd00;
