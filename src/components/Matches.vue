@@ -108,7 +108,7 @@ export default {
   data() {
     return {
       matchesArray: [],
-      limit: 10,
+      limit: 6,
       busy: false,
       teams,
       seasons,
@@ -119,7 +119,6 @@ export default {
   mounted() {},
   methods: {
     searchInput(value) {
-      // this.matchesArray = this.matchesArray;
       this.matchesArray = this.matchesArray.filter((match) =>
         Object.values(match).includes(value)
       );
@@ -130,7 +129,6 @@ export default {
         this.matchesArray.length,
         this.limit + this.matchesArray.length
       );
-      // console.log(append)
       this.matchesArray = this.matchesArray.concat(append);
       this.busy = false;
     },
