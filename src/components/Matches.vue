@@ -1,27 +1,40 @@
 <template>
   <div class="container-fluid">
-    <div class="flex">
-      <div>
-        <Filter
-          @search-in-table="searchInput"
-          :options="seasons"
-          :criteria="'Filter by season'"
-        />
-        <Filter
-          @search-in-table="searchInput"
-          :options="teams"
-          :criteria="'Filter by team'"
-        />
-        <Filter
-          @search-in-table="searchInput"
-          :options="venues"
-          :criteria="'Filter by venue'"
-        />
-      </div>
-      <Search
-        :placeholder="'search for teams and venues'"
-        @input="searchInput"
-      />
+    <div class="grid">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <Filter
+            @search-in-table="searchInput"
+            :options="seasons"
+            :criteria="'Filter by season'"
+          />
+          <Filter
+            @search-in-table="searchInput"
+            :options="teams"
+            :criteria="'Filter by team'"
+          />
+          <Filter
+            @search-in-table="searchInput"
+            :options="venues"
+            :criteria="'Filter by venue'"
+          />
+          <Search
+            :placeholder="'search for teams and venues'"
+            @input="searchInput"
+          />
+        </div>
+      </nav>
     </div>
     <div class="grid">
       <div v-for="match in matches" :key="match.id" class="card">
@@ -31,13 +44,13 @@
         </div>
         <div class="flex details">
           <div class="flex">
-            <img src="./media/red.png" alt="">
+            <img src="./media/red.png" alt="" />
             <span>{{ match.team1 }}</span>
           </div>
           vs
           <div class="flex">
-             <span>{{ match.team2 }}</span>
-            <img src="./media/yellow.png" alt="">
+            <span>{{ match.team2 }}</span>
+            <img src="./media/yellow.png" alt="" />
           </div>
         </div>
         <div>
@@ -90,29 +103,29 @@ tr {
   font-size: 0.8rem;
 }
 .card {
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 1rem 0;
   font-size: 0.9rem;
   box-shadow: 3px 3px 5px 0px #221121;
   border: none;
   border-radius: 0.5rem;
-  background-color:#420264;
+  background-color: #420264;
   cursor: pointer;
 }
 .heading {
-  color: #FDCD00;
+  color: #fdcd00;
   padding: 0 1rem;
   border-bottom: 1px solid grey;
   margin-bottom: 0.5rem;
 }
 .grid {
   display: grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 1rem;
   margin: 1rem 0;
 }
 .flex {
-  padding:.5rem .5rem ;
+  padding: 0.5rem 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
