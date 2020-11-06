@@ -13,7 +13,7 @@
       <div v-for="player in players" :key="player.name">
         <div class="card">
           <div class="flex">
-            <img src="../assets/player.png" alt="" />
+            <img src="../assets/player.png" alt="" width="48" height="48"/>
             <div>
               <span class="block detail">{{ player.Player_Name }}</span>
               <span class="block">{{ player.DOB }}</span>

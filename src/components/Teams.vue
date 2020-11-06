@@ -5,7 +5,7 @@
         <div class="card">
           <span class="heading">{{ team.team }}</span>
           <div class="flex">
-            <img src="../assets/yellow.png" alt="" />
+            <img src="../assets/yellow.png" alt="" width="48" height="48" />
             <div>
               <span class="block wins"
                 >{{ team.home_matches }}/{{ team.home_wins }}</span

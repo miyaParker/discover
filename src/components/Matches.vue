@@ -12,7 +12,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <img src="../assets/filter.png" alt="" />
+          <img src="../assets/filter.png" alt="" width="24" height="24" />
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Filter
