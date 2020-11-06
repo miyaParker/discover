@@ -63,20 +63,20 @@
       </div>
     </div>
     <div class="grid">
-      <div v-for="match in matchesArray" :key="match.id" class="card">
+      <div v-for="match in matches" :key="match.id" class="card">
         <div class="flex heading">
           <span>{{ match.venue }}, {{ match.city }}</span>
           <span>{{ match.date }}</span>
         </div>
         <div class="flex details">
           <div class="flex">
-            <img src="./media/red.png" alt="" />
+            <img src="./media/red.png" alt="" width="48" height="48" />
             <span>{{ match.team1 }}</span>
           </div>
           vs
           <div class="flex">
             <span>{{ match.team2 }}</span>
-            <img src="./media/yellow.png" alt="" />
+            <img src="./media/yellow.png" alt="" width="48" height="48" />
           </div>
         </div>
         <div>
@@ -90,14 +90,13 @@
       </div>
     </div>
     <div>
-      <button v-on:click="loadMore" class="button">Load More</button>
+      <button v-on:click="loadData" class="button">Load More</button>
     </div>
   </div>
 </template>
 <script>
 import Search from "./Search";
 import Filter from "./Filter";
-import matches from "./matches.json";
 import { teams, seasons, venues } from "./data";
 export default {
   name: "Matches",
@@ -107,7 +106,8 @@ export default {
   },
   data() {
     return {
-      matchesArray: [],
+      data: [],
+      matches: [],
       limit: 6,
       busy: false,
       teams,
@@ -118,37 +118,54 @@ export default {
   },
   methods: {
     searchInput(value) {
-      this.matchesArray = this.matchesArray.filter((match) =>
+      this.matches = this.matches.filter((match) =>
         Object.values(match).includes(value)
       );
     },
-    loadMore() {
+    fetchData() {
+      const dataList = localStorage.getItem("matches");
+      this.data = JSON.parse(dataList);
+      console.log("...fetching data");
+      this.loadData();
+    },
+    loadData() {
       this.busy = true;
-      const append = matches.slice(
-        this.matchesArray.length,
-        this.limit + this.matchesArray.length
+      console.log("...is loading")
+      const append = this.data.slice(
+        this.matches.length,
+        this.limit + this.matches.length
       );
-      this.matchesArray = this.matchesArray.concat(append);
+      this.matches = this.matches.concat(append);
       this.busy = false;
+      console.log("...finished loading")
+
     },
     filterClicked() {
       this.hidden = this.hidden ? false : true;
     },
-    
   },
   created() {
-      this.loadMore();
-    },
+    if (window.localStorage) {
+      if (localStorage.getItem("matches") === null) {
+        import("./matches.json").then(({ default: data }) => {
+          localStorage.setItem("matches", JSON.stringify(data));
+          this.fetchData();
+        });
+      } else {
+        this.fetchData();
+      }
+    }
+  },
 };
 </script>
 <style scoped>
-.container{
+.container {
   padding-bottom: 1rem;
 }
-.button{
+.button {
   border: none;
-  padding: .5rem 1rem;
-  border-radius: .5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
 .card {
   color: #ffffff;

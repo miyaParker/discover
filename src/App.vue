@@ -8,7 +8,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import NavBar from "./components/NavBar";
-const Matches = defineAsyncComponent(() => import("./components/Matches"));
+import Matches from './components/Matches'
 const Teams = defineAsyncComponent(() => import("./components/Teams"));
 const Players = defineAsyncComponent(() => import("./components/Players"));
 export default {
