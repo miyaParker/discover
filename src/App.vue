@@ -26,7 +26,6 @@ export default {
   methods: {
     setEntity(value) {
       this.entity = value;
-      console.log(this.entity);
     },
   },
 };

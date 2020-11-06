@@ -10,10 +10,10 @@
     </div>
 
     <div class="grid-display">
-      <div v-for="player in playersArray" :key="player.name">
+      <div v-for="player in players" :key="player.name">
         <div class="card">
           <div class="flex">
-            <img src="./media/player.png" alt="" />
+            <img src="../assets/player.png" alt="" />
             <div>
               <span class="block detail">{{ player.Player_Name }}</span>
               <span class="block">{{ player.DOB }}</span>
@@ -24,22 +24,21 @@
       </div>
     </div>
     <div>
-      <button v-on:click="loadMore" class="button">Load More</button>
+      <button v-on:click="loadData" class="button">Load More</button>
     </div>
   </div>
 </template>
 <script>
 import Search from "./Search";
 import Filter from "./Filter";
-import players from "./players.json";
 import { seasons } from "./data";
 export default {
   name: "Players",
   data() {
     return {
-      players,
       seasons,
-      playersArray: [],
+      data: [],
+      players: [],
       limit: 12,
       busy: false,
     };
@@ -50,27 +49,42 @@ export default {
   },
   methods: {
     searchInput(value) {
-      console.log(value);
-      this.players = players;
       this.players = this.players.filter((player) =>
         Object.values(player).includes(value)
       );
     },
-    loadMore() {
+    fetchData() {
+      const dataList = localStorage.getItem("players");
+      this.data = JSON.parse(dataList);
+      console.log("...fetching players");
+      this.loadData();
+    },
+    loadData() {
       this.busy = true;
-      const append = players.slice(
-        this.playersArray.length,
-        this.limit + this.playersArray.length
+      console.log("...loading players");
+      const append = this.data.slice(
+        this.players.length,
+        this.limit + this.players.length
       );
-      this.playersArray = this.playersArray.concat(append);
+      this.players = this.players.concat(append);
       this.busy = false;
+      console.log("...finished loading players");
     },
     filterClicked() {
       this.hidden = this.hidden ? false : true;
     },
   },
   created() {
-    this.loadMore();
+    if (window.localStorage) {
+      if (localStorage.getItem("players") === null) {
+        import("./players.json").then(({ default: data }) => {
+          localStorage.setItem("players", JSON.stringify(data));
+          this.fetchData();
+        });
+      } else {
+        this.fetchData();
+      }
+    }
   },
 };
 </script>

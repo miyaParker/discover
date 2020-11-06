@@ -12,7 +12,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <img src="./media/filter.png" alt="" />
+          <img src="../assets/filter.png" alt="" />
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Filter
@@ -70,13 +70,13 @@
         </div>
         <div class="flex details">
           <div class="flex">
-            <img src="./media/red.png" alt="" width="48" height="48" />
+            <img src="../assets/red.png" alt="" width="48" height="48" />
             <span>{{ match.team1 }}</span>
           </div>
           vs
           <div class="flex">
             <span>{{ match.team2 }}</span>
-            <img src="./media/yellow.png" alt="" width="48" height="48" />
+            <img src="../assets/yellow.png" alt="" width="48" height="48" />
           </div>
         </div>
         <div>
@@ -125,19 +125,19 @@ export default {
     fetchData() {
       const dataList = localStorage.getItem("matches");
       this.data = JSON.parse(dataList);
-      console.log("...fetching data");
+      console.log("...fetching matches");
       this.loadData();
     },
     loadData() {
       this.busy = true;
-      console.log("...is loading")
+      console.log("... loading matches")
       const append = this.data.slice(
         this.matches.length,
         this.limit + this.matches.length
       );
       this.matches = this.matches.concat(append);
       this.busy = false;
-      console.log("...finished loading")
+      console.log("...finished loading matches")
 
     },
     filterClicked() {
