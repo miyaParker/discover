@@ -169,7 +169,7 @@ export default {
   font-size: 0.9rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: rgba(10, 10, 10, 0.651);
+  background-color:rgb(10, 10, 10);
   cursor: pointer;
 }
 .hidden {
