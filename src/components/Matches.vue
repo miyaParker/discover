@@ -12,22 +12,24 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-
           <img src="../assets/filter.png" alt="" width="24" height="24" />
-          <span style="color: white; padding:.5rem"> Filters </span>
+          <span style="color: white; padding: 0.5rem"> Filters </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Dropdown
+            v-on:change="setSeason"
             @search-in-table="searchInput"
             :options="seasons"
             :criteria="'Filter by season'"
           />
           <Dropdown
+            v-on:change="setTeam"
             @search-in-table="searchInput"
             :options="teams"
             :criteria="'Filter by team'"
           />
           <Dropdown
+            v-on:change="setVenue"
             @search-in-table="searchInput"
             :options="venues"
             :criteria="'Filter by venue'"
@@ -38,8 +40,9 @@
           />
         </div>
       </nav>
-      <div v-bind:class="{ card: true, hidden, absolute:true }">
+      <div v-bind:class="{ card: true, hidden, absolute: true }">
         <Dropdown
+          v-on:change="filterList"
           class="mb-1"
           @search-in-table="searchInput"
           :options="seasons"
@@ -92,7 +95,7 @@
       </div>
     </div>
     <div>
-      <button v-on:click="loadData" class="button">Load More Matches</button>
+      <button v-on:click="loadData(data)" class="button">Load More Matches</button>
     </div>
   </div>
 </template>
@@ -108,6 +111,10 @@ export default {
   },
   data() {
     return {
+      season: "",
+      team: "",
+      venue: "",
+      filterList: [],
       data: [],
       matches: [],
       limit: 30,
@@ -115,21 +122,49 @@ export default {
       teams,
       seasons,
       venues,
+      value: "",
       hidden: true,
     };
   },
   methods: {
-    searchInput() {
-      return this.matches
+    setTeam() {
+      this.team = this.value;
+      this.filterDataList();
+    },
+    setVenue() {
+      this.venue = this.value;
+      this.filterDataList();
+    },
+    setSeason() {
+      this.season = this.value;
+      this.filterDataList();
+    },
+    filterDataList() {
+      this.resetLists();
+      this.filterList = this.data.filter(
+        (match) =>
+          Object.values(match).includes(this.season) &&
+          Object.values(match).includes(this.team) &&
+          Object.values(match).includes(this.venue)
+      );
+      this.loadData(this.filterList);
+    },
+    resetLists() {
+      this.matches = [];
+      // this.filterList = [];
+    },
+    searchInput(value) {
+      this.value = value;
+      return this.matches;
     },
     fetchData() {
       const dataList = localStorage.getItem("matches");
       this.data = JSON.parse(dataList);
-      this.loadData();
+      this.loadData(this.data);
     },
-    loadData() {
+    loadData(dataList) {
       this.busy = true;
-      const append = this.data.slice(
+      const append = dataList.slice(
         this.matches.length,
         this.limit + this.matches.length
       );
@@ -169,15 +204,15 @@ export default {
   font-size: 0.9rem;
   border: none;
   border-radius: 0.5rem;
-  background-color:rgb(10, 10, 10);
+  background-color: rgb(10, 10, 10);
   cursor: pointer;
 }
 .hidden {
   display: none;
 }
-.absolute{
+.absolute {
   position: relative;
-  top:50%;
+  top: 50%;
   z-index: 1;
 }
 .heading {
@@ -189,10 +224,10 @@ export default {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-gap: .5rem;
+  grid-gap: 0.5rem;
   margin: 1rem 0;
 }
-.filter{
+.filter {
   justify-content: space-around;
   flex-direction: column;
 }
