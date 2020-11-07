@@ -1,4 +1,3 @@
-
 <template>
   <NavBar @entity="setEntity" />
   <Matches v-show="entity == 'Matches'" />
