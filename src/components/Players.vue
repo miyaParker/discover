@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex">
+    <div class="flex filter">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <button
           v-on:click="filterClicked"
@@ -13,7 +13,7 @@
           aria-label="Toggle navigation"
         >
           <img src="../assets/filter.png" alt="" width="24" height="24" />
-          <span style="color: white; padding:.5rem"> Filters </span>
+          <span style="color: white; padding: 0.5rem"> Filters </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Dropdown
@@ -24,7 +24,7 @@
           <Search :placeholder="'search for a player'" @input="searchInput" />
         </div>
       </nav>
-      <div v-bind:class="{ card: true, hidden, absolute:true }">
+      <div v-bind:class="{ card: true, hidden }">
         <Dropdown
           class="mb-1"
           @search-in-table="searchInput"
@@ -33,10 +33,9 @@
         />
         <Search
           class="mb-1"
-          :placeholder="'search for teams and venues'"
+          :placeholder="'search for a player'"
           @input="searchInput"
         />
-        <button>Apply filters</button>
       </div>
     </div>
     <div class="grid-display">
@@ -45,7 +44,9 @@
           <div class="flex">
             <img src="../assets/player.png" alt="" width="48" height="48" />
             <div>
-              <span class="block detail">{{ player.Player_Name }}</span>
+              <span class="block detail">{{
+                player.Player_Name.toUpperCase()
+              }}</span>
               <span class="block">{{ player.DOB }}</span>
               <span>{{ player.Country }}</span>
             </div>
@@ -135,6 +136,9 @@ export default {
   border-bottom: 1px solid grey;
   margin-bottom: 0.5rem;
 }
+.filter {
+  flex-direction: column;
+}
 .card {
   color: #ffffff;
   padding: 1rem 0;
@@ -144,9 +148,9 @@ export default {
   background-color: rgb(10, 10, 10);
   cursor: pointer;
 }
-.absolute{
+.absolute {
   position: absolute;
-  top:50%;
+  top: 50%;
   z-index: 1;
 }
 .block {
@@ -163,5 +167,6 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+
 }
-</style>
+</style>6p

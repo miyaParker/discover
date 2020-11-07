@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex">
+    <div class="flex filter">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <button
           v-on:click="filterClicked"
@@ -176,7 +176,7 @@ export default {
   display: none;
 }
 .absolute{
-  position: absolute;
+  position: relative;
   top:50%;
   z-index: 1;
 }
@@ -191,6 +191,10 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: .5rem;
   margin: 1rem 0;
+}
+.filter{
+  justify-content: space-around;
+  flex-direction: column;
 }
 .flex {
   padding: 0.5rem 0.5rem;

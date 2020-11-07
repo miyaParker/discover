@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     fetchInput() {
-        console.log(this.filterOption)
       this.$emit("search-in-table", this.filterOption);
     },
   },

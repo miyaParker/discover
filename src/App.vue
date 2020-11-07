@@ -6,11 +6,10 @@
   <Players v-show="entity == 'Players'" />
 </template>
 <script>
-import { defineAsyncComponent } from "vue";
 import NavBar from "./components/NavBar";
-import Matches from './components/Matches'
-const Teams = defineAsyncComponent(() => import("./components/Teams"));
-const Players = defineAsyncComponent(() => import("./components/Players"));
+import Matches from './components/Matches';
+import Teams from "./components/Teams";
+import Players from "./components/Players";
 export default {
   components: {
     Matches,
