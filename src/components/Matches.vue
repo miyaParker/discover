@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="grid">
+    <div class="flex">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <button
           v-on:click="filterClicked"
@@ -90,7 +90,7 @@
       </div>
     </div>
     <div>
-      <button v-on:click="loadData" class="button">Load More</button>
+      <button v-on:click="loadData" class="button">Load More Matches</button>
     </div>
   </div>
 </template>
@@ -192,7 +192,7 @@ export default {
 .flex {
   padding: 0.5rem 0.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 .details {

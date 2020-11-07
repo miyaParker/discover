@@ -1,32 +1,47 @@
 <template>
   <div class="container">
     <div class="flex">
-      <Dropdown
-        @search-in-table="searchInput"
-        :options="country"
-        :criteria="'Filter by country'"
-      />
-      <Search :placeholder="'search for a player'" @input="searchInput" />
-    </div>
-
-    <div class="grid-display">
-      <div v-for="player in players" :key="player.name">
-        <div class="card">
-          <div class="flex">
-            <img src="../assets/player.png" alt="" width="48" height="48"/>
-            <div>
-              <span class="block detail">{{ player.Player_Name }}</span>
-              <span class="block">{{ player.DOB }}</span>
-              <span>{{ player.Country }}</span>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <button
+          v-on:click="filterClicked"
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <img src="../assets/filter.png" alt="" width="24" height="24" />
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <Dropdown
+            @search-in-table="searchInput"
+            :options="country"
+            :criteria="'Filter by country'"
+          />
+          <Search :placeholder="'search for a player'" @input="searchInput" />
+        </div>
+         </nav>
+        </div>
+      <div class="grid-display">
+        <div v-for="player in players" :key="player.name">
+          <div class="card">
+            <div class="flex">
+              <img src="../assets/player.png" alt="" width="48" height="48" />
+              <div>
+                <span class="block detail">{{ player.Player_Name }}</span>
+                <span class="block">{{ player.DOB }}</span>
+                <span>{{ player.Country }}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div>
+        <button v-on:click="loadData" class="button">Load More</button>
+      </div>
     </div>
-    <div>
-      <button v-on:click="loadData" class="button">Load More</button>
-    </div>
-  </div>
 </template>
 <script>
 import Search from "./Search";
@@ -49,7 +64,7 @@ export default {
   },
   methods: {
     searchInput() {
-      return this.players 
+      return this.players;
     },
     fetchData() {
       const dataList = localStorage.getItem("players");
@@ -116,13 +131,13 @@ export default {
 .grid-display {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: .5rem;
+  grid-gap: 0.5rem;
   margin: 1rem 0;
 }
 .flex {
   margin-top: 1rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 </style>
