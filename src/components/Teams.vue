@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Search :placeholder="'search for a team'" @input="searchInput" class="mb-3"/>
     <div v-for="team in teams" :key="team.team">
       <div class="card">
         <div class="grid-display">
@@ -18,8 +19,19 @@
 </template>
 <script>
 import teams from "../data/teams.json";
+import Search from "./Search"
 export default {
   name: "Teams",
+  components:{
+    Search
+  },
+  methods:{
+ searchInput(value) {
+      this.teams = this.teams.filter((team) =>
+        Object.values(team).includes(value)
+      );
+    },
+  },
   data() {
     return {
       teams,

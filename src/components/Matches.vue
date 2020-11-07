@@ -188,7 +188,7 @@ export default {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-gap: 1rem;
+  grid-gap: .5rem;
   margin: 1rem 0;
 }
 .flex {

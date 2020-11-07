@@ -41,4 +41,8 @@ button {
   border: none;
   padding: 0.6rem 1rem;
 }
+button:hover{
+  background-color: #ce6413;
+  color: white;
+}
 </style>
