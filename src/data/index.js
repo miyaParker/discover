@@ -37,3 +37,8 @@ export const venues=[
     {value:"Kanpur", text:"Kanpur"},
     {value:"Chandigarh", text:"Chandigarh"}
 ]
+
+export const country =[
+    {value:"India", text:"India"},
+    {value:"Overseas", text:"OverSeas"}
+]

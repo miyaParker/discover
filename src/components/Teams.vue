@@ -1,11 +1,17 @@
 <template>
   <div class="container">
-    <Search :placeholder="'search for a team'" @input="searchInput" class="mb-3"/>
+    <Search
+      :placeholder="'search for a team'"
+      @input="searchInput()"
+      class="mb-3"
+    />
     <div v-for="team in teams" :key="team.team">
       <div class="card">
         <div class="grid-display">
           <p class="heading">{{ team.team }}</p>
-         <span><img src="../assets/yellow.png" alt="" width="32" height="32" /></span> 
+          <span
+            ><img src="../assets/yellow.png" alt="" width="32" height="32"
+          /></span>
           <span class="block big-text"
             >{{ team.home_matches }}/{{ team.home_wins }}</span
           >
@@ -26,11 +32,9 @@ export default {
     Search
   },
   methods:{
- searchInput(value) {
-      this.teams = this.teams.filter((team) =>
-        Object.values(team).includes(value)
-      );
-    },
+ searchInput() {
+     return this.teams
+ }
   },
   data() {
     return {
@@ -57,7 +61,7 @@ export default {
   border-radius: 0.5rem;
   background-color: rgb(10, 10, 10);
   cursor: pointer;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 .grid-display {
   display: grid;

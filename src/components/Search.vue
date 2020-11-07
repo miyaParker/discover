@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form v-on:submit="submitInput($event)">
     <input type="text" :placeholder="placeholder"/>
     <button>search</button>
   </form>
@@ -18,6 +18,9 @@ export default {
     },
   },
   methods: {
+    submitInput(e){
+      e.preventDefault()
+    },
     fetchInput() {
       this.$emit("input", this.searchInput);
     },

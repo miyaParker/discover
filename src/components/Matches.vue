@@ -117,10 +117,8 @@ export default {
     };
   },
   methods: {
-    searchInput(value) {
-      this.matches = this.matches.filter((match) =>
-        Object.values(match).includes(value)
-      );
+    searchInput() {
+      return this.matches
     },
     fetchData() {
       const dataList = localStorage.getItem("matches");

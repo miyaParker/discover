@@ -3,8 +3,8 @@
     <div class="flex">
       <Dropdown
         @search-in-table="searchInput"
-        :options="seasons"
-        :criteria="'Filter by season'"
+        :options="country"
+        :criteria="'Filter by country'"
       />
       <Search :placeholder="'search for a player'" @input="searchInput" />
     </div>
@@ -31,12 +31,12 @@
 <script>
 import Search from "./Search";
 import Dropdown from "./Dropdown";
-import { seasons } from "../data/index";
+import { country } from "../data/index";
 export default {
   name: "Players",
   data() {
     return {
-      seasons,
+      country,
       data: [],
       players: [],
       limit: 30,
@@ -48,10 +48,8 @@ export default {
     Dropdown,
   },
   methods: {
-    searchInput(value) {
-      this.players = this.players.filter((player) =>
-        Object.values(player).includes(value)
-      );
+    searchInput() {
+      return this.players 
     },
     fetchData() {
       const dataList = localStorage.getItem("players");
