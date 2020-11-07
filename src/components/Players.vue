@@ -13,6 +13,7 @@
           aria-label="Toggle navigation"
         >
           <img src="../assets/filter.png" alt="" width="24" height="24" />
+          <span style="color: white; padding:.5rem"> Filters </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Dropdown
@@ -22,26 +23,40 @@
           />
           <Search :placeholder="'search for a player'" @input="searchInput" />
         </div>
-         </nav>
-        </div>
-      <div class="grid-display">
-        <div v-for="player in players" :key="player.name">
-          <div class="card">
-            <div class="flex">
-              <img src="../assets/player.png" alt="" width="48" height="48" />
-              <div>
-                <span class="block detail">{{ player.Player_Name }}</span>
-                <span class="block">{{ player.DOB }}</span>
-                <span>{{ player.Country }}</span>
-              </div>
+      </nav>
+      <div v-bind:class="{ card: true, hidden, absolute:true }">
+        <Dropdown
+          class="mb-1"
+          @search-in-table="searchInput"
+          :options="country"
+          :criteria="'Filter by country'"
+        />
+        <Search
+          class="mb-1"
+          :placeholder="'search for teams and venues'"
+          @input="searchInput"
+        />
+        <button>Apply filters</button>
+      </div>
+    </div>
+    <div class="grid-display">
+      <div v-for="player in players" :key="player.name">
+        <div class="card">
+          <div class="flex">
+            <img src="../assets/player.png" alt="" width="48" height="48" />
+            <div>
+              <span class="block detail">{{ player.Player_Name }}</span>
+              <span class="block">{{ player.DOB }}</span>
+              <span>{{ player.Country }}</span>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <button v-on:click="loadData" class="button">Load More</button>
-      </div>
     </div>
+    <div>
+      <button v-on:click="loadData" class="button">Load More</button>
+    </div>
+  </div>
 </template>
 <script>
 import Search from "./Search";
@@ -56,6 +71,7 @@ export default {
       players: [],
       limit: 30,
       busy: false,
+      hidden: true,
     };
   },
   components: {
@@ -107,6 +123,9 @@ export default {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
 }
+.hidden {
+  display: none;
+}
 .detail {
   font-size: 1rem;
 }
@@ -125,6 +144,11 @@ export default {
   background-color: rgb(10, 10, 10);
   cursor: pointer;
 }
+.absolute{
+  position: absolute;
+  top:50%;
+  z-index: 1;
+}
 .block {
   display: block;
 }
@@ -137,7 +161,7 @@ export default {
 .flex {
   margin-top: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 </style>

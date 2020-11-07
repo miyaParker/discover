@@ -1,7 +1,7 @@
 <template>
   <form v-on:submit="submitInput($event)">
+    <i><img src="../assets/search.png" alt=""></i>
     <input type="text" :placeholder="placeholder"/>
-    <button>search</button>
   </form>
 </template>
 <script>
@@ -36,7 +36,7 @@ input {
   display: inline;
   border-radius: 0.5rem;
   border: none;
-  padding: 0.6rem;
+  padding: 0.6rem 3rem;
   background-color: ghostwhite;
 }
 button {
@@ -47,5 +47,12 @@ button {
 button:hover{
   background-color: #F1C40F;
   color: white;
+}
+input:focus {
+    outline: none;
+}
+i{
+  padding: 0.6rem;
+  position: absolute;
 }
 </style>

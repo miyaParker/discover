@@ -12,7 +12,9 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
+
           <img src="../assets/filter.png" alt="" width="24" height="24" />
+          <span style="color: white; padding:.5rem"> Filters </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Dropdown
@@ -175,6 +177,7 @@ export default {
 }
 .absolute{
   position: absolute;
+  top:50%;
   z-index: 1;
 }
 .heading {
@@ -192,7 +195,7 @@ export default {
 .flex {
   padding: 0.5rem 0.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .details {

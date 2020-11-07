@@ -39,4 +39,7 @@ select {
   margin-right: 1rem;
   
 }
+select:focus {
+    outline: none;
+}
 </style>
