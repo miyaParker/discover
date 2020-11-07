@@ -2,9 +2,24 @@
   <div id="nav" class="flex">
     <h2>Discover</h2>
     <ul>
-      <li v-on:click="displayMatches($event)" v-bind:class="{'active':(entity == 'Matches')}">Matches</li>
-      <li v-on:click="displayMatches($event)" v-bind:class="{'active':(entity == 'Players')}">Players</li>
-      <li v-on:click="displayMatches($event)" v-bind:class="{'active':(entity == 'Teams')}">Teams</li>
+      <li
+        v-on:click="displayMatches($event)"
+        v-bind:class="{ active: entity == 'Matches' }"
+      >
+        Matches
+      </li>
+      <li
+        v-on:click="displayMatches($event)"
+        v-bind:class="{ active: entity == 'Players' }"
+      >
+        Players
+      </li>
+      <li
+        v-on:click="displayMatches($event)"
+        v-bind:class="{ active: entity == 'Teams' }"
+      >
+        Teams
+      </li>
     </ul>
   </div>
 </template>
@@ -18,8 +33,8 @@ export default {
   },
   methods: {
     displayMatches(e) {
-      this.entity =e.target.innerText
-      this.$emit("entity",this.entity );
+      this.entity = e.target.innerText;
+      this.$emit("entity", this.entity);
     },
   },
 };
@@ -32,10 +47,8 @@ export default {
 #nav {
   padding: 1rem;
   margin-bottom: 1rem;
- 
 }
 div {
-  background-color: #340744;
   color: #fff;
 }
 li {
@@ -45,17 +58,17 @@ li {
   cursor: pointer;
 }
 ul {
-   display: grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
-.flex{
+.flex {
   display: flex;
   justify-content: space-around;
 }
-.active{
+.active {
   color: #ffffff;
   border: none;
-  border-radius: .4rem;
-  background-color: #420264;
+  border-radius: 0.4rem;
+  background-color:#ce6413;
 }
 </style>

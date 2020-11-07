@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: "Filter",
+  name: "Dropdown",
   data() {
     return {
       filterOption: "",
@@ -37,6 +37,6 @@ select {
   padding: 0.7rem;
   background-color: ghostwhite;
   margin-right: 1rem;
-  color: #340744;
+  
 }
 </style>

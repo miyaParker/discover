@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="flex">
-      <Filter
+      <Dropdown
         @search-in-table="searchInput"
         :options="seasons"
         :criteria="'Filter by season'"
@@ -30,8 +30,8 @@
 </template>
 <script>
 import Search from "./Search";
-import Filter from "./Filter";
-import { seasons } from "./data";
+import Dropdown from "./Dropdown";
+import { seasons } from "../data/index";
 export default {
   name: "Players",
   data() {
@@ -39,13 +39,13 @@ export default {
       seasons,
       data: [],
       players: [],
-      limit: 12,
+      limit: 30,
       busy: false,
     };
   },
   components: {
     Search,
-    Filter,
+    Dropdown,
   },
   methods: {
     searchInput(value) {
@@ -77,7 +77,7 @@ export default {
   created() {
     if (window.localStorage) {
       if (localStorage.getItem("players") === null) {
-        import("./players.json").then(({ default: data }) => {
+        import("../data/players.json").then(({ default: data }) => {
           localStorage.setItem("players", JSON.stringify(data));
           this.fetchData();
         });
@@ -107,10 +107,9 @@ export default {
   color: #ffffff;
   padding: 1rem 0;
   font-size: 0.9rem;
-  box-shadow: 3px 3px 5px 0px #221121;
   border: none;
   border-radius: 0.5rem;
-  background-color: #420264;
+  background-color: rgb(10, 10, 10);
   cursor: pointer;
 }
 .block {

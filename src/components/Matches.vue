@@ -15,17 +15,17 @@
           <img src="../assets/filter.png" alt="" width="24" height="24" />
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <Filter
+          <Dropdown
             @search-in-table="searchInput"
             :options="seasons"
             :criteria="'Filter by season'"
           />
-          <Filter
+          <Dropdown
             @search-in-table="searchInput"
             :options="teams"
             :criteria="'Filter by team'"
           />
-          <Filter
+          <Dropdown
             @search-in-table="searchInput"
             :options="venues"
             :criteria="'Filter by venue'"
@@ -36,20 +36,20 @@
           />
         </div>
       </nav>
-      <div v-bind:class="{ card: true, hidden: hidden }">
-        <Filter
+      <div v-bind:class="{ card: true, hidden, absolute:true }">
+        <Dropdown
           class="mb-1"
           @search-in-table="searchInput"
           :options="seasons"
           :criteria="'Filter by season'"
         />
-        <Filter
+        <Dropdown
           class="mb-1"
           @search-in-table="searchInput"
           :options="teams"
           :criteria="'Filter by team'"
         />
-        <Filter
+        <Dropdown
           class="mb-1"
           @search-in-table="searchInput"
           :options="venues"
@@ -96,19 +96,19 @@
 </template>
 <script>
 import Search from "./Search";
-import Filter from "./Filter";
-import { teams, seasons, venues } from "./data";
+import Dropdown from "./Dropdown";
+import { teams, seasons, venues } from "../data/index";
 export default {
   name: "Matches",
   components: {
     Search,
-    Filter,
+    Dropdown,
   },
   data() {
     return {
       data: [],
       matches: [],
-      limit: 6,
+      limit: 30,
       busy: false,
       teams,
       seasons,
@@ -125,20 +125,16 @@ export default {
     fetchData() {
       const dataList = localStorage.getItem("matches");
       this.data = JSON.parse(dataList);
-      console.log("...fetching matches");
       this.loadData();
     },
     loadData() {
       this.busy = true;
-      console.log("... loading matches")
       const append = this.data.slice(
         this.matches.length,
         this.limit + this.matches.length
       );
-      this.matches = this.matches.concat(append);
+      this.matches = [...this.matches, ...append];
       this.busy = false;
-      console.log("...finished loading matches")
-
     },
     filterClicked() {
       this.hidden = this.hidden ? false : true;
@@ -147,7 +143,7 @@ export default {
   created() {
     if (window.localStorage) {
       if (localStorage.getItem("matches") === null) {
-        import("./matches.json").then(({ default: data }) => {
+        import("../data/matches.json").then(({ default: data }) => {
           localStorage.setItem("matches", JSON.stringify(data));
           this.fetchData();
         });
@@ -171,17 +167,20 @@ export default {
   color: #ffffff;
   padding: 1rem 0;
   font-size: 0.9rem;
-  box-shadow: 3px 3px 5px 0px #7970783a;
   border: none;
   border-radius: 0.5rem;
-  background-color: #420264;
+  background-color: rgba(10, 10, 10, 0.651);
   cursor: pointer;
 }
 .hidden {
   display: none;
 }
+.absolute{
+  position: absolute;
+  z-index: 1;
+}
 .heading {
-  color: #fdcd00;
+  color: #696969;
   padding: 0 1rem;
   border-bottom: 1px solid grey;
   margin-bottom: 0.5rem;
