@@ -17,6 +17,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <Dropdown
+            v-on:change="filterByCountry"
             @search-in-table="searchInput"
             :options="country"
             :criteria="'Filter by country'"
@@ -26,6 +27,7 @@
       </nav>
       <div v-bind:class="{ card: true, hidden }">
         <Dropdown
+          v-on:change="filterByCountry"
           class="mb-1"
           @search-in-table="searchInput"
           :options="country"
@@ -47,7 +49,7 @@
               <span class="block detail">{{
                 player.Player_Name.toUpperCase()
               }}</span>
-              <span class="block">{{ player.DOB }}</span>
+              <span class="block">{{ player.DOB.replaceAll("-","/") }}</span>
               <span>{{ player.Country }}</span>
             </div>
           </div>
@@ -73,6 +75,7 @@ export default {
       limit: 30,
       busy: false,
       hidden: true,
+      value: "",
     };
   },
   components: {
@@ -80,8 +83,18 @@ export default {
     Dropdown,
   },
   methods: {
-    searchInput() {
-      return this.players;
+    filterByCountry() {
+      this.players = this.data.filter((player) => {
+        if (player.Country !== undefined) {
+          if (this.value === "India")
+            return Object.values(player).includes(this.value);
+          else return !Object.values(player).includes("India");
+        }
+      });
+    },
+    searchInput(value) {
+      this.value = value;
+      console.log(this.value);
     },
     fetchData() {
       const dataList = localStorage.getItem("players");
@@ -91,14 +104,12 @@ export default {
     },
     loadData() {
       this.busy = true;
-      console.log("...loading players");
       const append = this.data.slice(
         this.players.length,
         this.limit + this.players.length
       );
       this.players = this.players.concat(append);
       this.busy = false;
-      console.log("...finished loading players");
     },
     filterClicked() {
       this.hidden = this.hidden ? false : true;
@@ -167,6 +178,5 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 </style>6p

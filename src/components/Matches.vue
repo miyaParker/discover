@@ -42,19 +42,21 @@
       </nav>
       <div v-bind:class="{ card: true, hidden, absolute: true }">
         <Dropdown
-          v-on:change="filterList"
+          v-on:change="setSeason"
           class="mb-1"
           @search-in-table="searchInput"
           :options="seasons"
           :criteria="'Filter by season'"
         />
         <Dropdown
+          v-on:change="setTeam"
           class="mb-1"
           @search-in-table="searchInput"
           :options="teams"
           :criteria="'Filter by team'"
         />
         <Dropdown
+          v-on:change="setVenue"
           class="mb-1"
           @search-in-table="searchInput"
           :options="venues"
@@ -95,7 +97,19 @@
       </div>
     </div>
     <div>
-      <button v-on:click="loadData(data)" class="button">Load More Matches</button>
+      <span>
+        <img
+          src="../assets/loader.png"
+          alt=""
+          width="30"
+          height="30"
+          v-show="busy === true"
+          class="loader"
+        />
+      </span>
+      <button v-on:click="loadData(data)" class="button">
+        Load More Matches
+      </button>
     </div>
   </div>
 </template>
@@ -151,11 +165,10 @@ export default {
     },
     resetLists() {
       this.matches = [];
-      // this.filterList = [];
+      this.filterList = [];
     },
     searchInput(value) {
       this.value = value;
-      return this.matches;
     },
     fetchData() {
       const dataList = localStorage.getItem("matches");
@@ -190,6 +203,18 @@ export default {
 };
 </script>
 <style scoped>
+.loader {
+  animation: roll 3s infinite;
+  transform: rotate(30deg);
+}
+@keyframes roll {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .container {
   padding-bottom: 1rem;
 }
