@@ -49,7 +49,7 @@
               <span class="block detail">{{
                 player.Player_Name.toUpperCase()
               }}</span>
-              <span class="block">{{ player.DOB.replaceAll("-","/") }}</span>
+              <span class="block">{{ player.DOB }}</span>
               <span>{{ player.Country }}</span>
             </div>
           </div>
